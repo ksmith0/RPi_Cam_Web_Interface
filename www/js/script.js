@@ -128,6 +128,18 @@ function sys_reboot() {
   ajax_status.open("GET", "cmd_func.php?cmd=reboot", true);
   ajax_status.send();
 }
+//Added for HS light control
+function toggle_light() {
+  ajax_status.open("GET", "cmd_func.php?cmd=light", true);
+  ajax_status.send();
+  if(document.getElementById("light_button").value == "Enable Light")
+    document.getElementById("light_button").value = "Disable Light";
+  else if(document.getElementById("light_button").value == "Disable Light")
+    document.getElementById("light_button").value = "Enable Light";
+  else
+    document.getElementById("light_button").value = "Toggle Light";
+
+}
 
 //
 // MJPEG

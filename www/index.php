@@ -27,6 +27,12 @@
    $options_cn = array('First' => '1', 'Second' => '2');
    $options_st = array('Off' => '0', 'On' => '1');
    
+//Added for HS light control
+   $lightButton = "Disable Light";
+   shell_exec('gpio -g mode 21 out');
+   $lightStatus = shell_exec('gpio -g read 21');
+   if ($lightStatus == 0) $lightButton = "Enable Light";
+
    function initCamPos() {
       $tr = fopen("pipan_bak.txt", "r");
       if($tr){
@@ -198,6 +204,8 @@
       <div class="container-fluid text-center liveimage">
          <div><img id="mjpeg_dest" <?php echo getLoadClass() . getImgWidth();?> <?php if(file_exists("pipan_on")) echo "ontouchstart=\"pipan_start()\""; ?> onclick="toggle_fullscreen(this);" src="./loading.jpg"></div>
          <div id="main-buttons" <?php echo $displayStyle; ?> >
+<!--Added for HS light control-->
+            <input id="light_button" type="button" class="btn btn-primary" value="<?php echo $lightButton; ?>" onclick="toggle_light()">
             <input id="video_button" type="button" class="btn btn-primary">
             <input id="image_button" type="button" class="btn btn-primary">
             <input id="timelapse_button" type="button" class="btn btn-primary">
