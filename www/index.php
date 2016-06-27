@@ -30,6 +30,7 @@
 //Added for HS light control
    $lightButton = "Disable Light";
    shell_exec('gpio -g mode 21 out');
+   shell_exec('gpio -g mode 13 out');
    $lightStatus = shell_exec('gpio -g read 21');
    if ($lightStatus == 0) $lightButton = "Enable Light";
 

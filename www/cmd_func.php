@@ -5,9 +5,22 @@
 //Added for HS light control
    function toggle_light() {
      $lightStatus = shell_exec('gpio -g read 21');
-     if ($lightStatus == 0) shell_exec('gpio -g write 21 on');
-     else shell_exec('gpio -g write 21 off');
+     if ($lightStatus == 0) {
+	shell_exec('gpio -g write 21 on');
+	shell_exec('gpio -g write 13 off');
+     }
+     else {
+	shell_exec('gpio -g write 21 off');
+	shell_exec('gpio -g write 13 on');
+     }
    }
+
+  function disable_inhibit() {
+     $lightStatus = shell_exec('gpio -g read 21');
+     if ($lightStatus == 0) 
+      shell_exec('gpio -g write 13 on');
+  }
+     
 
   function sys_cmd($cmd) {
     if(strncmp($cmd, "reboot", strlen("reboot")) == 0) {
